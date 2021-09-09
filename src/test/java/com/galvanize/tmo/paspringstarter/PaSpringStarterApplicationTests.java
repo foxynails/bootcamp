@@ -38,7 +38,7 @@ class PaSpringStarterApplicationTests {
 
     @Test
     void createBook() throws Exception {
-        Book book = new Book("Author", "Title", "Year");
+        Book book = new Book("Author", "Title", 1992);
         mockMvc.perform(post("/api/books")
                         .content(objectMapper.writeValueAsString(book))
                         .contentType(MediaType.APPLICATION_JSON))
