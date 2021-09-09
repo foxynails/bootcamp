@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class LibraryController {
     List<Book> bookList = new ArrayList<>();
-
+    HashMap hashMap = new HashMap();
     @GetMapping("/health")
     public String health() {
         return "Hello";
@@ -32,14 +33,14 @@ public class LibraryController {
     }
 
     @GetMapping("/books")
-    public ResponseEntity<List<Book>> getBooks() {
+    public ResponseEntity<HashMap> getBooks() {
         if (bookList != null && bookList.size() > 0) {
             bookList = bookList.stream().sorted(Comparator.comparing(Book::getTitle)).collect(Collectors.toList());
-
         } else {
             bookList = new ArrayList<>();
         }
-        return new ResponseEntity<>(bookList, HttpStatus.OK);
+        hashMap.put("books", bookList);
+        return new ResponseEntity<>(hashMap, HttpStatus.OK);
     }
 
     @DeleteMapping("/books")
