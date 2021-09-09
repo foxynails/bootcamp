@@ -6,6 +6,12 @@ public class Book {
     String title;
     String yearPublished;
 
+    public Book(String author, String title, String yearPublished) {
+        this.author = author;
+        this.title = title;
+        this.yearPublished = yearPublished;
+    }
+
     public String getAuthor() {
         return author;
     }

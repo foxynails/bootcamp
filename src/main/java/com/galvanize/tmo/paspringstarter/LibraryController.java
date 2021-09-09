@@ -31,11 +31,7 @@ public class LibraryController {
 
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getBooks() {
-        if (bookList != null && bookList.size() > 0) {
-            return new ResponseEntity<>(bookList, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
 
     @DeleteMapping("/books")
