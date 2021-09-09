@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -31,6 +33,12 @@ public class LibraryController {
 
     @GetMapping("/books")
     public ResponseEntity<List<Book>> getBooks() {
+        if (bookList != null && bookList.size() > 0) {
+            bookList = bookList.stream().sorted(Comparator.comparing(Book::getTitle)).collect(Collectors.toList());
+
+        } else {
+            bookList = new ArrayList<>();
+        }
         return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
 
